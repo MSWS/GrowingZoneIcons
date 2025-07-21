@@ -118,9 +118,6 @@ namespace GrowingZoneIcons.Source {
 
         zoneCenter += GrowingZoneIcons.Settings.drawOffset.ToVector3();
 
-        Log.Message(
-          $"Stored: {new Vector2(3f, 3f)} Config: {GrowingZoneIcons.Settings.drawScale}");
-
         var graphic = growingZone.PlantDefToGrow.graphic;
         graphic = graphic.GetCopy(GrowingZoneIcons.Settings.drawScale,
           GrowingZoneIcons.ActiveShader);
