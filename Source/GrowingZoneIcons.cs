@@ -109,7 +109,8 @@ namespace GrowingZoneIcons.Source {
         return;
 
       foreach (var zone in Find.CurrentMap.zoneManager.AllZones) {
-        if (zone is not Zone_Growing growingZone || zone.Hidden) continue;
+        if (zone is not IPlantToGrowSettable growingZone || zone.Hidden)
+          continue;
 
         var zoneCenter = (zone.cells.Count == 0 ?
           IntVec3.Invalid :
@@ -118,11 +119,12 @@ namespace GrowingZoneIcons.Source {
 
         zoneCenter += GrowingZoneIcons.Settings.drawOffset.ToVector3();
 
-        var graphic = growingZone.PlantDefToGrow.graphic;
+        var graphic = growingZone.GetPlantDefToGrow().graphic;
         graphic = graphic.GetCopy(GrowingZoneIcons.Settings.drawScale,
           GrowingZoneIcons.ActiveShader);
 
-        graphic.DrawFromDef(zoneCenter, Rot4.North, growingZone.PlantDefToGrow);
+        graphic.DrawFromDef(zoneCenter, Rot4.North,
+          growingZone.GetPlantDefToGrow());
       }
     }
   }
